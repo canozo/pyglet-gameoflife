@@ -9,8 +9,8 @@ SCREEN_SIZE = 800
 SIZE = SCREEN_SIZE//IMG_SIZE
 
 game = Life(SIZE)
-background = pyglet.sprite.Sprite(pyglet.image.load(f'grid{IMG_SIZE}.png'))
-cell_img = pyglet.image.load(f'life{IMG_SIZE}.png')
+background = pyglet.sprite.Sprite(pyglet.image.load(f'resources/grid{IMG_SIZE}.png'))
+cell_img = pyglet.image.load(f'resources/life{IMG_SIZE}.png')
 
 window = pyglet.window.Window(height=SCREEN_SIZE, width=SCREEN_SIZE)
 
