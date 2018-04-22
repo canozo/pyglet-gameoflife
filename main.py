@@ -5,21 +5,25 @@ import itertools
 import pyglet
 
 IMG_SIZE = 8
-SIZE = 800//IMG_SIZE
+SCREEN_SIZE = 800
+SIZE = SCREEN_SIZE//IMG_SIZE
+
 game = Life(SIZE)
+background = pyglet.sprite.Sprite(pyglet.image.load(f'grid{IMG_SIZE}.png'))
 cell_img = pyglet.image.load(f'life{IMG_SIZE}.png')
 
-window = pyglet.window.Window(height=800, width=800)
+window = pyglet.window.Window(height=SCREEN_SIZE, width=SCREEN_SIZE)
 
 
 @window.event
 def on_draw():
     window.clear()
+    background.draw()
     batch = pyglet.graphics.Batch()
     batch_sprites = []
     for i, j in itertools.product(range(SIZE), repeat=2):
         if game.grid[i][j]:
-            x, y = j*IMG_SIZE, 784-i*IMG_SIZE
+            x, y = j*IMG_SIZE, SCREEN_SIZE-IMG_SIZE-i*IMG_SIZE
             batch_sprites.append(pyglet.sprite.Sprite(cell_img, x, y, batch=batch))
     batch.draw()
 
@@ -34,7 +38,7 @@ def on_mouse_press(x, y, button, modifiers):
 def on_key_press(symbol, modifiers):
     global game
     if symbol == key.N:
-        game = Life(800//IMG_SIZE)
+        game = Life(SIZE)
 
 
 @window.event
