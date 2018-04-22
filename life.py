@@ -1,15 +1,14 @@
 import itertools
 
-SIZE = 50
-
 
 class Life:
-    def __init__(self):
-        self.grid = [[False for _ in range(SIZE)] for _ in range(SIZE)]
+    def __init__(self, size: int):
+        self.size = size
+        self.grid = [[False for _ in range(self.size)] for _ in range(self.size)]
 
     def iterate(self):
-        next_gen = [[False for _ in range(SIZE)] for _ in range(SIZE)]
-        for i, j in itertools.product(range(SIZE), repeat=2):
+        next_gen = [[False for _ in range(self.size)] for _ in range(self.size)]
+        for i, j in itertools.product(range(self.size), repeat=2):
             cell = self.grid[i][j]
             up = down = left = right = upper_left = upper_right = lower_left = lower_right = False
 
@@ -17,17 +16,17 @@ class Life:
                 up = self.grid[i-1][j]
             if j > 0:
                 left = self.grid[i][j-1]
-            if i < SIZE - 1:
+            if i < self.size-1:
                 down = self.grid[i+1][j]
-            if j < SIZE - 1:
+            if j < self.size-1:
                 right = self.grid[i][j+1]
             if i > 0 and j > 0:
                 upper_left = self.grid[i-1][j-1]
-            if i > 0 and j < SIZE-1:
+            if i > 0 and j < self.size-1:
                 upper_right = self.grid[i-1][j+1]
-            if i < SIZE-1 and j > 0:
+            if i < self.size-1 and j > 0:
                 lower_left = self.grid[i+1][j-1]
-            if i < SIZE-1 and j < SIZE-1:
+            if i < self.size-1 and j < self.size-1:
                 lower_right = self.grid[i+1][j+1]
 
             neighbors = (up, down, left, right, upper_left, upper_right, lower_left, lower_right)

@@ -4,10 +4,11 @@ from life import Life
 import itertools
 import pyglet
 
-SIZE = 50
+IMG_SIZE = 8
+SIZE = 800//IMG_SIZE
+game = Life(SIZE)
 
 window = pyglet.window.Window(height=800, width=800)
-game = Life()
 
 
 @window.event
@@ -17,22 +18,22 @@ def on_draw():
     batch_sprites = []
     for i, j in itertools.product(range(SIZE), repeat=2):
         if game.grid[i][j]:
-            x, y = j*16, 784-i*16
-            batch_sprites.append(pyglet.sprite.Sprite(pyglet.image.load('life16.png'), x, y, batch=batch))
+            x, y = j*IMG_SIZE, 784-i*IMG_SIZE
+            batch_sprites.append(pyglet.sprite.Sprite(pyglet.image.load(f'life{IMG_SIZE}.png'), x, y, batch=batch))
     batch.draw()
 
 
 @window.event
 def on_mouse_press(x, y, button, modifiers):
     if button == mouse.LEFT:
-        game.change_life(x // 16, SIZE - 1 - y // 16)
+        game.change_life(x // IMG_SIZE, SIZE - 1 - y // IMG_SIZE)
 
 
 @window.event
 def on_key_press(symbol, modifiers):
     global game
     if symbol == key.N:
-        game = Life()
+        game = Life(800//IMG_SIZE)
 
 
 @window.event
