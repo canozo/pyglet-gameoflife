@@ -9,25 +9,17 @@ class Life:
     def iterate(self):
         next_gen = [[False for _ in range(self.size)] for _ in range(self.size)]
         for i, j in itertools.product(range(self.size), repeat=2):
+            s = self.size
             cell = self.grid[i][j]
-            up = down = left = right = upper_left = upper_right = lower_left = lower_right = False
 
-            if i > 0:
-                up = self.grid[i-1][j]
-            if j > 0:
-                left = self.grid[i][j-1]
-            if i < self.size-1:
-                down = self.grid[i+1][j]
-            if j < self.size-1:
-                right = self.grid[i][j+1]
-            if i > 0 and j > 0:
-                upper_left = self.grid[i-1][j-1]
-            if i > 0 and j < self.size-1:
-                upper_right = self.grid[i-1][j+1]
-            if i < self.size-1 and j > 0:
-                lower_left = self.grid[i+1][j-1]
-            if i < self.size-1 and j < self.size-1:
-                lower_right = self.grid[i+1][j+1]
+            up = self.grid[i-1][j]
+            left = self.grid[i][j-1]
+            down = self.grid[(i+1) % s][j]
+            right = self.grid[i][(j+1) % s]
+            upper_left = self.grid[i-1][j-1]
+            upper_right = self.grid[i-1][(j+1) % s]
+            lower_left = self.grid[(i+1) % s][j-1]
+            lower_right = self.grid[(i+1) % s][(j+1) % s]
 
             neighbors = (up, down, left, right, upper_left, upper_right, lower_left, lower_right)
 
