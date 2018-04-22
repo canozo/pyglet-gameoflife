@@ -7,6 +7,7 @@ import pyglet
 IMG_SIZE = 8
 SIZE = 800//IMG_SIZE
 game = Life(SIZE)
+cell_img = pyglet.image.load(f'life{IMG_SIZE}.png')
 
 window = pyglet.window.Window(height=800, width=800)
 
@@ -19,7 +20,7 @@ def on_draw():
     for i, j in itertools.product(range(SIZE), repeat=2):
         if game.grid[i][j]:
             x, y = j*IMG_SIZE, 784-i*IMG_SIZE
-            batch_sprites.append(pyglet.sprite.Sprite(pyglet.image.load(f'life{IMG_SIZE}.png'), x, y, batch=batch))
+            batch_sprites.append(pyglet.sprite.Sprite(cell_img, x, y, batch=batch))
     batch.draw()
 
 
